@@ -72,6 +72,14 @@ class UnaryLift{
     }
   }
   /**
+    reverse of `then`, useful for constructor ordering.
+  **/
+  static public function compose<Pi,Pii,R>(that:Unary<Pii,R>,self:Unary<Pi,Pii>):Unary<Pi,R>{
+    return function(a:Pi):R{
+      return that(self(a));
+    }
+  }
+  /**
    * Returns a function that calls the original function both on the left and the right of a Couple.
   **/
   static public function dual<Pi,R>(self:Pi->R):Dual<Pi,Pi,R,R>{
