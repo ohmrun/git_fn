@@ -11,11 +11,11 @@
         "0b1kn00b"
     ],
     "releasenote": "rewrite",
-    "version": "0.9.0",
+    "version": "1.0.0",
     "url": "https://github.com/0b1kn00b/stx_pointwise",
     "dependencies": {
-        "stx_pico"  : "",
-        "stx_nano"  : ""
+        "stx_pico"  : "1.0.0",
+        "stx_nano"  : "0.1.5"
     },
     "classPath": "src/main/haxe"
 }
