@@ -1,13 +1,14 @@
 package stx.fn;
 
+@:using(stx.fn.Sink.SinkLift)
 @:callable abstract Sink<P>(SinkDef<P>) from SinkDef<P> to SinkDef<P>{
-  public function new(self:SinkDef<P>){
-    this = self;
-  }
-  static public function unit<P>():Sink<P>{
+  static public var _(default,never) = SinkLift;
+  public inline function new(self:SinkDef<P>) this = self;
+
+  static public inline function unit<P>():Sink<P>{
     return lift((p:P) -> {});
   }
-  @:noUsing static public function lift<P>(fn:P->Void):Sink<P>{
+  @:noUsing static public inline function lift<P>(fn:P->Void):Sink<P>{
     return new Sink(fn);
   }
 
@@ -16,11 +17,24 @@ package stx.fn;
       return this;
     }
   #end
-  public function stage(before: P -> Void, after: P->Void):Sink<P>{
+  public inline function stage(before: P -> Void, after: P->Void):Sink<P>{
     return (p:P) -> {
       before(p);
       this(p);
       after(p);
     }
+  }
+}
+class SinkLift{
+  static public inline function then<P>(self:Sink<P>,that:Sink<P>):Sink<P>{
+    return Sink.lift((p:P) -> {
+      self(p);
+      that(p);
+    });
+  }
+  static public inline function bind<P>(self:Sink<P>,p:P):Block{
+    return Block.lift(
+      self.bind(p)
+    );
   }
 }

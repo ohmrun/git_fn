@@ -1,7 +1,18 @@
 package stx;
 
 class Fn{
-
+  static public function fn(wildcard:Wildcard){
+    return new stx.fn.Module();
+  }
+  @:noUsing static public inline function _0x(?fn:Void->Void){
+    return __.option(fn).map(Block.lift).def(Block.unit);
+  }
+  @:noUsing static public inline function _1x<P>(?fn:P->Void){
+    return __.option(fn).map(Sink.lift).def(Sink.unit);
+  }
+  @:noUsing static public inline function _1r(){
+    return Unary.unit();
+  }
 }
 typedef BlockDef                                = Void->Void;
 typedef Block                                   = stx.fn.Block;

@@ -157,4 +157,10 @@ class UnaryLift{
   static public function bindI<P,R>(fn:Unary<P,R>,p:P):Thunk<R>{
     return fn.prj().bind(p);
   }
+  static public function sink<P,R>(fn:Unary<P,R>,?handler:Sink<R>):Sink<P>{
+    return Sink.lift((p:P) -> {
+      var val = fn(p);
+      handler(val);
+    });
+  }
 }

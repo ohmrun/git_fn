@@ -3,10 +3,11 @@ package stx.fn;
 @:callable abstract Thunk<R>(ThunkDef<R>) from ThunkDef<R>{
   static public inline function _() return Constructor.ZERO;
 
-  static public function lift<R>(thk:ThunkDef<R>):Thunk<R>{
+  
+  static public inline function lift<R>(thk:ThunkDef<R>):Thunk<R>{
     return new Thunk(thk);
   }
-  public function new(self:ThunkDef<R>){
+  public inline function new(self:ThunkDef<R>){
     this = self;
   }
   public function then<Ri>(that:R->Ri):Thunk<Ri>        return _()._.then(that,this);
