@@ -17,7 +17,9 @@ package stx.fn;
       return this;
     }
   #end
-  public inline function stage(before: P -> Void, after: P->Void):Sink<P>{
+  public inline function stage(?before: P -> Void,?after: P->Void):Sink<P>{
+    before  = before  == null ? (_:P) -> {} : before;
+    after   = after   == null ? (_:P) -> {} : after;
     return (p:P) -> {
       before(p);
       this(p);
