@@ -26,6 +26,9 @@ package stx.fn;
       after(p);
     }
   }
+  public function prj():P->Void{
+    return this;
+  }
 }
 class SinkLift{
   static public inline function then<P>(self:Sink<P>,that:Sink<P>):Sink<P>{
@@ -38,5 +41,11 @@ class SinkLift{
     return Block.lift(
       self.bind(p)
     );
+  }
+  static public inline function promote<P,R>(self:Sink<P>,r:R):Unary<P,R>{
+    return (p:P) -> {
+      self(p);
+      return r;
+    }
   }
 }
