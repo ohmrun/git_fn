@@ -17,15 +17,11 @@ class BlockLift{
   static public function returning<R>(self:Block,r:R):Thunk<R>{
     return () -> { self(); return r; }
   }
-  /**
-    Compare function identity.
-  **/
+  /**Compare function identity.**/
   static public function equals(self:Block,that:Block){
     return Reflect.compareMethods(self,that);
   }
-  /**
-    Produces a function that takes a parameter, ignores it, and calls `f`.
-  **/
+  /**Produces a function that takes a parameter, ignores it, and calls `f`.**/
   static public function promote<P>(f: Block): P->Void {
     return function(p: P): Void {
       f();
@@ -41,7 +37,6 @@ class BlockLift{
       that();
     }
   }
-
   static public function enact(self:Block){
     self();
   }
