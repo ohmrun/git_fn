@@ -48,4 +48,9 @@ class SinkLift{
       return r;
     }
   }
+  static public inline function compose<P,Pi>(self:Sink<P>,fn:Pi->P):Sink<Pi>{
+    return (pI:Pi) -> {
+      self(fn(pI));
+    }
+  }
 }
