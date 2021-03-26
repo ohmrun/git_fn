@@ -1,8 +1,8 @@
 package stx.fn;
 
+@:using(stx.fn.Thunk.ThunkLift)
 @:callable abstract Thunk<R>(ThunkDef<R>) from ThunkDef<R>{
-  static public inline function _() return Constructor.ZERO;
-
+  static public var _(default,never) = ThunkLift;
   
   static public inline function lift<R>(thk:ThunkDef<R>):Thunk<R>{
     return new Thunk(thk);
@@ -10,23 +10,18 @@ package stx.fn;
   public inline function new(self:ThunkDef<R>){
     this = self;
   }
-  public function then<Ri>(that:R->Ri):Thunk<Ri>        return _()._.then(that,this);
-  public function cache():Thunk<R>                      return _()._.cache(this);
+  public function then<Ri>(that:R->Ri):Thunk<Ri>        return _.then(that,this);
+  public function cache():Thunk<R>                      return _.cache(this);
 
   public function prj():ThunkDef<R>{
     return this;
   }
 }
-private class Constructor extends Clazz{
-  static public var ZERO(default,never) = new Constructor();
-  public var _(default,never) = new Destructure();
-}
-
-class Destructure extends Clazz{
+class ThunkLift extends Clazz{
   /**
     Calls a Thunk.
   **/
-  public function reply<R>(self:Thunk<R>):R{
+  static public function reply<R>(self:Thunk<R>):R{
     return self();
   }
   /**
@@ -35,7 +30,7 @@ class Destructure extends Clazz{
   **/
   @params("The Thunk to call once")
   @returns("A Thunk which will call the input Thunk once.")
-  public function cache<R>(self: Thunk<R>): Thunk<R> {
+  static public function cache<R>(self: Thunk<R>): Thunk<R> {
     var r : R   = null;
     return function() {
       return if (r == null) {
@@ -74,7 +69,7 @@ class Destructure extends Clazz{
     Produces a function that calls `f1` and `f2` in left to right order with the same input, and returns no result.
     @returns The composite function.
   **/
-  public function then<Ri,Rii>(that:Ri->Rii,self:Void -> Ri):Thunk<Rii>{
+  static public function then<Ri,Rii>(that:Ri->Rii,self:Void -> Ri):Thunk<Rii>{
     return function():Rii{
       return that(self());
     }
