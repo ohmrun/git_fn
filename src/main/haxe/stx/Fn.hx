@@ -61,6 +61,11 @@ typedef Pick<Pi,Ri,Rii>                         = stx.fn.Pick<Pi,Ri,Rii>;
 typedef PerhapsDef<P,R>                         = Option<P> -> Option<R>;
 typedef Perhaps<P,R>                            = stx.fn.Perhaps<P,R>;
 
+typedef ArwDef<P,R,E>                           = stx.fn.Arw.ArwDef<P,R,E>;
+typedef Arw<P,R,E>                              = stx.fn.Arw<P,R,E>;
+
+typedef Bang                                    = stx.fn.Bang;
+
 class LiftCurriedBinary{
   /**
     Takes a function with one parameter that returns a function of one parameter, and produces
@@ -114,17 +119,16 @@ class LiftUnary{
     return f;
   }
 }
-class LiftBlock{
-  static public inline function fn(f:Void->Void):Block{
-    return f;
-  }
-}
 class LiftThunk{
   static public inline function fn<R>(fn:Void->R):Thunk<R>{
     return fn;
   }
 }
-
+class LiftBlock{
+  static public inline function fn(f:Void->Void):Block{
+    return f;
+  }
+}
 
 class LiftBinary{
   static public inline function fn<PI,PII,R>(fn:PI->PII->R):Binary<PI,PII,R>{

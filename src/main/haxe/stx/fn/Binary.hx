@@ -96,4 +96,7 @@ class BinaryLift extends Clazz{
   static public function encouple<Pi,Pii,R>(self:Pi->Pii->R):Unary<Couple<Pi,Pii>,R>{
     return (tp) -> tp.decouple(self);
   }
+  static public function arw<Pi,Pii,R,E>(self:Pi->Pii->R):Arw<Couple<Pi,Pii>,R,E>{
+    return Arw.fromBinary(self);
+  }
 }
