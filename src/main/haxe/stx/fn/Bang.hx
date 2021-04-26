@@ -1,12 +1,12 @@
 package stx.fn;
 
-typedef BangDef = Future<Block>;
+typedef BangDef = Future<Cycle>;
 
 @:using(stx.fn.Bang.BangLift)
 @:callable abstract Bang(BangDef) from BangDef to BangDef{
   @:noUsing static public function unit():Bang{
     return lift(Future.irreversible(
-      (cb) -> cb(Block.ZERO)
+      (cb) -> cb(Cycle.ZERO)
     ));
   }
   static public function wait():BangBang{
@@ -19,18 +19,18 @@ typedef BangDef = Future<Block>;
   private var self(get,never):Bang;
   private function get_self():Bang return lift(this);
 }
-abstract BangBang(FutureTrigger<Block>){
+abstract BangBang(FutureTrigger<Cycle>){
   public function new(){
     this = Future.trigger();
   }
-  public function fill(block:Void->Void):Void{
+  public function fill(block:Cycle):Void{
     this.trigger(block);
   }
   public function done():Void{
-    this.trigger(Block.ZERO);
+    this.trigger(Cycle.ZERO);
   }
   public function pass(bang:Bang){
-    (bang:Future<Block>).handle(
+    (bang:Future<Cycle>).handle(
       (x) -> {
         this.trigger(x);
       }
@@ -46,20 +46,14 @@ class BangLift{
   static public function seq(self:Bang,that:Bang):Bang{
     return lift(
       Future.inSequence([self,that]).map(
-        arr -> () -> {
-          __.option(arr[0]).defv(Block.ZERO)();
-          __.option(arr[1]).defv(Block.ZERO)();
-        }
+        arr -> Cycle.lift(() -> __.option(arr[0]).defv(Cycle.ZERO).seq(__.option(arr[1]).defv(Cycle.ZERO)))
       )
     );
   }
   static public function par(self:Bang,that:Bang):Bang{
     return lift(
       Future.inParallel([self,that]).map(
-        arr -> () -> {
-          __.option(arr[0]).defv(Block.ZERO)();
-          __.option(arr[1]).defv(Block.ZERO)();
-        }
+        arr -> Cycle.lift(() -> __.option(arr[0]).defv(Cycle.ZERO).par(__.option(arr[1]).defv(Cycle.ZERO)()))
       )
     );
   }

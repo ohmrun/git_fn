@@ -65,6 +65,7 @@ typedef ArwDef<P,R,E>                           = stx.fn.Arw.ArwDef<P,R,E>;
 typedef Arw<P,R,E>                              = stx.fn.Arw<P,R,E>;
 
 typedef Bang                                    = stx.fn.Bang;
+typedef Cycle                                   = stx.fn.Cycle;
 
 class LiftCurriedBinary{
   /**

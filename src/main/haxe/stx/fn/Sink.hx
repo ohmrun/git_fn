@@ -17,12 +17,17 @@ package stx.fn;
       return this;
     }
   #end
-  public inline function stage(before: P -> Void, after: P->Void):Sink<P>{
+  public inline function stage(?before: P -> Void,?after: P->Void):Sink<P>{
+    before  = before  == null ? (_:P) -> {} : before;
+    after   = after   == null ? (_:P) -> {} : after;
     return (p:P) -> {
       before(p);
       this(p);
       after(p);
     }
+  }
+  public function prj():P->Void{
+    return this;
   }
 }
 class SinkLift{
@@ -36,5 +41,16 @@ class SinkLift{
     return Block.lift(
       self.bind(p)
     );
+  }
+  static public inline function promote<P,R>(self:Sink<P>,r:R):Unary<P,R>{
+    return (p:P) -> {
+      self(p);
+      return r;
+    }
+  }
+  static public inline function compose<P,Pi>(self:Sink<P>,fn:Pi->P):Sink<Pi>{
+    return (pI:Pi) -> {
+      self(fn(pI));
+    }
   }
 }
