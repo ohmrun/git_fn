@@ -57,4 +57,35 @@ class CycleLift{
       }
     );
   }
+  static public function submit(self:Cycle){
+    var event = null;
+        event = haxe.MainLoop.add(
+          () -> {
+            try{
+              self().handle(
+                function rec(x:Cycle){
+                  try{
+                    x().handle(rec);
+                  }catch(e:CYCLED){
+                    event.stop();
+                  }
+                }
+              );
+            }catch(e:CYCLED){
+              event.stop();
+            }
+          }
+        );
+  }
+  static public function crunch(self:Cycle){
+    try{
+      self().handle(
+        (x) -> {
+          crunch(x);
+        }
+      );
+    }catch(e:CYCLED){
+      
+    }
+  }
 }
