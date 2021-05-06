@@ -2,7 +2,7 @@ package stx.fn;
 
 typedef ArwOutDef<R,E>    = Outcome<R,Defect<E>>;
 typedef ArwOut<R,E>       = ArwOutDef<R,E>; 
-typedef ArwDef<P,R,E>     = P -> Sink<ArwOut<R,E>> -> Bang;
+typedef ArwDef<P,R,E>     = P -> Sink<ArwOut<R,E>> -> Work;
 //typedef ArwPairDef<Pi,Pii,Ri,Rii,E> = 
 
 @:using(stx.fn.Arw.ArwLift)
@@ -18,14 +18,14 @@ typedef ArwDef<P,R,E>     = P -> Sink<ArwOut<R,E>> -> Bang;
   static public function unit<P,E>(){
     return lift((p:P,cont:Sink<ArwOut<P,E>>) -> {
       cont(__.success(p));
-      return Bang.unit();
+      return Work.unit();
     });
   }
   static public inline function fromFun<P,R,E>(fn:P->R):Arw<P,R,E>{
     return lift((p:P,cont:Sink<ArwOut<R,E>>) -> {
       var res = __.success(fn(p));
       cont(res);
-      return Bang.unit();
+      return Work.unit();
     });
   }
   public function prj():ArwDef<P,R,E> return this;
@@ -38,13 +38,13 @@ class ArwLift{
   static public inline function then<P,R,Ri,E>(self:ArwDef<P,R,E>,that:Arw<R,Ri,E>):Arw<P,Ri,E>{
     return lift(
       (p:P,cont:Sink<ArwOut<Ri,E>>) -> { 
-        var b = Bang.wait();
+        var b = Work.wait();
         var a = self(
           p,
           (res:ArwOut<R,E>) -> res.fold(
             ok -> {
-              var bang = that(ok,cont);
-              bang.prj().fold(
+              var work = that(ok,cont);
+              work.prj().fold(
                 ok -> ok.handle(
                   (v:Cycle) -> {
                     b.fill(v);
@@ -72,7 +72,7 @@ class ArwLift{
         var fts   = [];
         var l   : Option<ArwOut<Ri,E>>    = None;
         var r   : Option<ArwOut<Rii,E>>   = None;
-        var bang                          = Bang.wait();
+        var work                          = Work.wait();
 
         final completer = () -> {
           l.zip(r).fold(
@@ -80,7 +80,7 @@ class ArwLift{
               ok.decouple(
                 (l,r) -> cont(l.zip(r))
               );
-              bang.done();
+              work.done();
             },
             () -> {}
           );
@@ -93,10 +93,10 @@ class ArwLift{
           r = Some(o);
           completer();
         }
-        var l_bang = lift(self)(p.fst(),lh);
-        var r_bang = that(p.snd(),rh);
+        var l_work = lift(self)(p.fst(),lh);
+        var r_work = that(p.snd(),rh);
 
-        return l_bang.par(r_bang).seq(bang);
+        return l_work.par(r_work).seq(work);
       }
     );
   }

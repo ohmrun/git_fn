@@ -22,7 +22,7 @@ typedef CycleDef = Thunk<Future<Cycle>>;
   @:from static public function fromFutureCycle(self:Future<Cycle>):Cycle{
     return lift(() -> self);
   }
-  @:from static public function fromBang(self:Bang):Cycle{
+  @:from static public function fromWork(self:Work):Cycle{
     return self.prj().fold(
       (ok) -> lift(() -> ok),
       ()   -> ZERO

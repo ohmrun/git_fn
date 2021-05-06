@@ -43,7 +43,7 @@ class BlockLift{
   static public function bung(self:Block){
     return () -> {
       self();
-      return Bang.unit();
+      return Work.unit();
     }
   }
 }
