@@ -42,8 +42,24 @@ class ArwLift{
         var a = self(
           p,
           (res:ArwOut<R,E>) -> res.fold(
-            ok -> b.pass(that(ok,cont)),
-            no -> cont(__.failure(no))
+            ok -> {
+              var bang = that(ok,cont);
+              bang.prj().fold(
+                ok -> ok.handle(
+                  (v:Cycle) -> {
+                    b.fill(v);
+                  }
+                ),
+                () -> {
+                  b.done();
+                  return () -> {}; 
+                }
+              );
+            },
+            no -> {
+              cont(__.failure(no));
+              return () -> {};
+            }
           )
         );
         return a.seq(b);

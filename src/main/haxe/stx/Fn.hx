@@ -61,10 +61,12 @@ typedef Pick<Pi,Ri,Rii>                         = stx.fn.Pick<Pi,Ri,Rii>;
 typedef PerhapsDef<P,R>                         = Option<P> -> Option<R>;
 typedef Perhaps<P,R>                            = stx.fn.Perhaps<P,R>;
 
+typedef ArwOut<R,E>                           = stx.fn.Arw.ArwOut<R,E>;
 typedef ArwDef<P,R,E>                           = stx.fn.Arw.ArwDef<P,R,E>;
 typedef Arw<P,R,E>                              = stx.fn.Arw<P,R,E>;
 
-typedef Bang                                    = stx.fn.Bang;
+typedef Work                                    = stx.fn.Work;
+typedef Bang                                    = stx.fn.Work.Bang;
 typedef Cycle                                   = stx.fn.Cycle;
 typedef CYCLED                                  = stx.fn.Cycle.CYCLED;
 
