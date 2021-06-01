@@ -28,16 +28,22 @@ typedef CycleDef = Thunk<Future<Cycle>>;
       ()   -> ZERO
     );
   }
+
 }
 class CycleLift{
   static public function lift(self:CycleDef):Cycle return Cycle.lift(self);
 
   static public function seq(self:Cycle,that:Cycle):Cycle{
-    return lift(() -> try{
-      self().map(seq.bind(_,that));
-    }catch(e:CYCLED){
-      that;
-    });
+    //trace('seq setup');
+    return lift(
+      () -> {
+        return try{
+          self().map(seq.bind(_,that));
+        }catch(e:CYCLED){
+          that;
+        };
+      } 
+    );
   }
   static public function par(self:Cycle,that:Cycle):Cycle{
     return lift(
@@ -84,6 +90,7 @@ class CycleLift{
         );
   }
   static public function crunch(self:Cycle){
+    //trace('crunching');
     try{
       self().handle(
         (x) -> {
@@ -91,7 +98,9 @@ class CycleLift{
         }
       );
     }catch(e:CYCLED){
-      
+      //trace("cycled");
+    }catch(e:haxe.Exception){
+      throw e;
     }
   }
 }
