@@ -65,11 +65,6 @@ typedef ArwOut<R,E>                             = stx.fn.Arw.ArwOut<R,E>;
 typedef ArwDef<P,R,E>                           = stx.fn.Arw.ArwDef<P,R,E>;
 typedef Arw<P,R,E>                              = stx.fn.Arw<P,R,E>;
 
-typedef Work                                    = stx.fn.Work;
-typedef Bang                                    = stx.fn.Work.Bang;
-typedef Cycle                                   = stx.fn.Cycle;
-typedef CYCLED                                  = stx.fn.Cycle.CYCLED;
-
 class LiftCurriedBinary{
   /**
     Takes a function with one parameter that returns a function of one parameter, and produces
