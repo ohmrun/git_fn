@@ -40,10 +40,10 @@ class BlockLift{
   static public function enact(self:Block){
     self();
   }
-  static public function bung(self:Block){
-    return () -> {
-      self();
-      return Work.unit();
-    }
-  }
+  // static public function bung(self:Block){
+  //   return () -> {
+  //     self();
+  //     return Work.unit();
+  //   }
+  // }
 }

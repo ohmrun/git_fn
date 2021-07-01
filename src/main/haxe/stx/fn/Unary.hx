@@ -163,7 +163,7 @@ class UnaryLift{
       handler(val);
     });
   }
-  static public function arw<P,R,E>(fn:UnaryDef<P,R>):Arw<P,R,E>{
-    return Arw.fromFun(fn);
-  }
+  // static public function arw<P,R,E>(fn:UnaryDef<P,R>):Arw<P,R,E>{
+  //   return Arw.fromFun(fn);
+  // }
 }
