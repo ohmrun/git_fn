@@ -1,5 +1,7 @@
 package stx.fn;
 
+using stx.Log;
+
 enum CYCLED{
   CYCLED;
 }
@@ -70,9 +72,11 @@ class CycleLift{
     );
   }
   static public function submit(self:Cycle){
+    __.log().debug(_ -> _.pure('Cycle.submit'));
     var event = null;
         event = haxe.MainLoop.add(
           () -> {
+            __.log().debug(_ -> _.pure('loop'));
             try{
               self().handle(
                 function rec(x:Cycle){
