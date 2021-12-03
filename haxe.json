@@ -1,13 +1,15 @@
 {
   "build" : {
-  "-lib" : ["stx_nano","stx_pico"],
+    "-lib" : ["stx_nano","stx_pico"],
     "-cp"  : ["src/main/haxe"],
-    "hashlink" : {
+    "main" : {
       "-main" : "Main",
-      "-hl"   : "build/test/hl/main.hl" 
+      "hashlink" : {
+        "-hl"   : "build/test/hl/main.hl" 
+      },
+      "interp" : {
+        "--interp"   : true 
+      }
     }
-  },
-  "run" : {
-    "hashlink" : [["hl","build/test/hl/main.hl"]]
   }
 }
