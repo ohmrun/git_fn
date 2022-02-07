@@ -135,7 +135,7 @@ class UnaryLift{
   /**
     Returns a function that produces a `Couple` from a value.
   **/
-  static public function fan<P,R>(a:P->R):Unary<P,Couple<R,R>>{
+  @:noUsing static public function fan<P,R>(a:P->R):Unary<P,Couple<R,R>>{
     return a.fn().then(
       function(x){
         return __.couple(x,x);

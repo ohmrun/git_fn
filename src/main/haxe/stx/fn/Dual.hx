@@ -1,5 +1,8 @@
 package stx.fn;
 
+/**
+  Function taking two inputs in the form `Couple<Pi,Pii>` and returning `Couple<Ri,Rii`.
+**/
 @:using(stx.fn.Dual.DualLift)
 @:forward @:callable abstract Dual<Pi,Pii,Ri,Rii>(DualDef<Pi,Pii,Ri,Rii>) from DualDef<Pi,Pii,Ri,Rii> to DualDef<Pi,Pii,Ri,Rii>{
   static public var _(default,never) = DualLift;

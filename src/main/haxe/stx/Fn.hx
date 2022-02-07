@@ -4,6 +4,9 @@ class Fn{
   static public function fn(wildcard:Wildcard){
     return new stx.fn.Module();
   }
+  static public function f<Pi,R>(wildcard:Wildcard,f:F<Pi,R>):Unary<Pi,R>{
+    return f;
+  } 
   @:noUsing static public inline function _0x(?fn:Void->Void){
     return __.option(fn).map(Block.lift).def(Block.unit);
   }
@@ -61,6 +64,8 @@ typedef Pick<Pi,Ri,Rii>                         = stx.fn.Pick<Pi,Ri,Rii>;
 typedef PerhapsDef<P,R>                         = Option<P> -> Option<R>;
 typedef Perhaps<P,R>                            = stx.fn.Perhaps<P,R>;
 
+typedef F<Pi,R>                                 = stx.fn.F<Pi,R>;
+typedef FSum<Pi,R>                              = stx.fn.F.FSum<Pi,R>;
 // typedef ArwOut<R,E>                             = stx.fn.Arw.ArwOut<R,E>;
 // typedef ArwDef<P,R,E>                           = stx.fn.Arw.ArwDef<P,R,E>;
 // typedef Arw<P,R,E>                              = stx.fn.Arw<P,R,E>;

@@ -18,5 +18,8 @@
         "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
         "stx_nano"      : "git:https://github.com/ohmrun/stx_nano.git"
     },
+    "devDependencies":{
+        "stx_test" : "git:https://github.com/ohmrun/stx_test.git"
+    },
     "classPath": "src/main/haxe"
 }
