@@ -1,6 +1,6 @@
 package;
 
-using stx.Core;
+using stx.Test;
 using stx.Fn;
 
-using stx.assert.Lift;
+using stx.Assert;

@@ -1,6 +1,5 @@
 package stx.fn.test;
 
-using EmbedTest;
 private enum Lego{
   LegoOfMyString(str:String);
   LegoOfMyInt(int:Int);

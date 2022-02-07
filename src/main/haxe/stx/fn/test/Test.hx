@@ -1,4 +1,4 @@
-import stx.fn.Package;
+package stx.fn.test;
 
 // class Test extends stx.test.pack.Test{
 //   static function main(){
