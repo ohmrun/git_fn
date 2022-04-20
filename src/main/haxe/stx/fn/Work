@@ -11,7 +11,7 @@ typedef WorkDef = Option<Future<Cycle>>;
     return new Bang();
   }
   public function new(self) this = self;
-  static public function lift(self:WorkDef):Work return new Work(self);
+  @:noUsing static public function lift(self:WorkDef):Work return new Work(self);
 
   public function prj():WorkDef return this;
   private var self(get,never):Work;
@@ -49,7 +49,7 @@ typedef WorkDef = Option<Future<Cycle>>;
   }
 }
 class WorkLift{
-  static public function lift(self:WorkDef):Work return Work.lift(self);
+  @:noUsing static public function lift(self:WorkDef):Work return Work.lift(self);
 
   static public function seq(self:Work,that:Work):Work{
     //trace('work seq setup $self $that');

@@ -8,8 +8,11 @@ enum FSum<Pi,R>{
 }
 abstract F<Pi,R>(FSum<Pi,R>) from FSum<Pi,R> to FSum<Pi,R>{
   public function new(self) this = self;
-  static public function lift<Pi,R>(self:FSum<Pi,R>):F<Pi,R> return new F(self);
+  @:noUsing static public function lift<Pi,R>(self:FSum<Pi,R>):F<Pi,R> return new F(self);
 
+  static inline public function unit<P>():FSum<P,P>{
+    return lift(F1X((x:P) -> x));
+  }
   @:from static public function fromF0X<Pi:Noise,R:Noise>(fn:Void->Void):F<Noise,Noise>{
     return new F(F0X(fn));
   }

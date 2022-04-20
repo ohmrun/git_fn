@@ -8,8 +8,8 @@ package stx.fn;
   public function new(self:BlockDef) this = self;
 
   static public function unit():Block{return function(){};}
-  static public function pure(fn:Void->Void):Block{return fn;}
-  static public function lift(fn:Void->Void):Block{ return new Block(fn); }
+  @:noUsing static public function pure(fn:Void->Void):Block{return fn;}
+  @:noUsing static public function lift(fn:Void->Void):Block{ return new Block(fn); }
   
 }
 class BlockLift{

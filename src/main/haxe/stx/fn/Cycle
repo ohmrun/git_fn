@@ -8,7 +8,7 @@ typedef CycleDef = Thunk<Future<Cycle>>;
 @:using(stx.fn.Cycle.CycleLift)
 @:callable abstract Cycle(CycleDef) from CycleDef to CycleDef{
   public function new(self:CycleDef) this = self;
-  static public function lift(self:CycleDef):Cycle{
+  @:noUsing static public function lift(self:CycleDef):Cycle{
     return new Cycle(self);
   }
   static public var ZERO = unit();
@@ -31,7 +31,7 @@ typedef CycleDef = Thunk<Future<Cycle>>;
 
 }
 class CycleLift{
-  static public function lift(self:CycleDef):Cycle return Cycle.lift(self);
+  @:noUsing static public function lift(self:CycleDef):Cycle return Cycle.lift(self);
 
   static public function seq(self:Cycle,that:Cycle):Cycle{
     //trace('seq setup');
