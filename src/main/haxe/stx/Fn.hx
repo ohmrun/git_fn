@@ -28,6 +28,8 @@ typedef FunXX                                   = Block;
 **/
 typedef SinkDef<P>                              = P -> Void;
 typedef Sink<P>                                 = stx.fn.Sink<P>;
+typedef SinkLift                                = stx.fn.Sink.SinkLift;
+
 typedef FunXRDef<P>                             = SinkDef<P>;
 typedef Fun1X<P>                                = Sink<P>;
 

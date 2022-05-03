@@ -42,10 +42,16 @@ class SinkLift{
       self.bind(p)
     );
   }
-  static public inline function promote<P,R>(self:Sink<P>,r:R):Unary<P,R>{
+  static public inline function returns<P,R>(self:Sink<P>,r:R):Unary<P,R>{
     return (p:P) -> {
       self(p);
       return r;
+    }
+  }
+  static public inline function promote<P,R>(self:SinkDef<P>):Unary<P,P>{
+    return (p:P) -> {
+      self(p);
+      return p;
     }
   }
   static public inline function compose<P,Pi>(self:Sink<P>,fn:Pi->P):Sink<Pi>{
