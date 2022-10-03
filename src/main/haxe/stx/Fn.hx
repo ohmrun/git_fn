@@ -33,7 +33,6 @@ typedef SinkLift                                = stx.fn.Sink.SinkLift;
 typedef FunXRDef<P>                             = SinkDef<P>;
 typedef Fun1X<P>                                = Sink<P>;
 
-
 typedef ThunkDef<R>                             = Void -> R;
 typedef Thunk<R>                                = stx.fn.Thunk<R>;
 typedef Fun1XDef<R>                             = ThunkDef<R>;
@@ -49,10 +48,8 @@ typedef Binary<Pi,Pii,R>                        = stx.fn.Binary<Pi,Pii,R>;
 typedef Fun2RDef<Pi,Pii,R>                      = BinaryDef<Pi,Pii,R>;
 typedef Fun2R<Pi,Pii,R>                         = Binary<Pi,Pii,R>;
 
-
 typedef TernaryDef<Pi,Pii,Piii,R>               = Pi -> Pii -> Piii -> R;
 typedef Ternary<Pi,Pii,Piii,R>                  = stx.fn.Ternary<Pi,Pii,Piii,R>;
-
 
 typedef DualDef<Pi,Pii,Ri,Rii>                  = Couple<Pi,Pii> -> Couple<Ri,Rii>;
 typedef Dual<Pi,Pii,Ri,Rii>                     = stx.fn.Dual<Pi,Pii,Ri,Rii>;
