@@ -1,6 +1,6 @@
 {
   "build" : {
-    "-lib" : ["stx_nano","stx_pico","stx_test"],
+    "-lib" : ["tink_core","stx_nano","stx_pico","stx_test"],
     "-cp"  : ["src/main/haxe"],
     "unit" : {
       "--macro" : [

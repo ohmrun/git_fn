@@ -1,0 +1,3 @@
+[submodule "plz-out/tmp/gsm_install_hxml._build/haxe_modules/hxml"]
+	path = plz-out/tmp/gsm_install_hxml._build/haxe_modules/hxml
+	url = https://github.com/chipshort/hxml.git

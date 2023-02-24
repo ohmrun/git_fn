@@ -1,5 +1,12 @@
 package stx;
 
+import tink.CoreApi;
+
+using stx.Pico;
+using stx.Nano;
+
+using stx.Fn;
+
 class Fn{
   static public function fn(wildcard:Wildcard){
     return new stx.fn.Module();
