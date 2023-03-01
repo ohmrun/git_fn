@@ -13,9 +13,9 @@
     "version": "1.1.0",
     "url": "https://github.com/ohmrun/stx_fn",
     "dependencies": {
-        "tink_core"     : "git:https://github.com/haxetink/tink_core.git",
-        "stx_pico"      : "git:https://github.com/ohmrun/stx_pico.git",
-        "stx_nano"      : "git:https://github.com/ohmrun/stx_nano.git"
+        "tink_core"     : "",
+        "stx_pico"      : "",
+        "stx_nano"      : ""
     },
     "classPath": "src/main/haxe"
 }
