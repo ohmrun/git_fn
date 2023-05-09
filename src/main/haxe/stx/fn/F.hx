@@ -13,10 +13,10 @@ abstract F<Pi,R>(FSum<Pi,R>) from FSum<Pi,R> to FSum<Pi,R>{
   static inline public function unit<P>():FSum<P,P>{
     return lift(F1X((x:P) -> x));
   }
-  @:from static public function fromF0X<Pi:Noise,R:Noise>(fn:Void->Void):F<Noise,Noise>{
+  @:from static public function fromF0X<Pi:Nada,R:Nada>(fn:Void->Void):F<Nada,Nada>{
     return new F(F0X(fn));
   }
-  @:from static public function fromF1X<Pi,R:Noise>(fn:Pi->Void):F<Pi,Noise>{
+  @:from static public function fromF1X<Pi,R:Nada>(fn:Pi->Void):F<Pi,Nada>{
     return lift(F1X(fn));
   }
   @:from static public function fromF1R<Pi,R>(fn:Pi->R):F<Pi,R>{
@@ -24,8 +24,8 @@ abstract F<Pi,R>(FSum<Pi,R>) from FSum<Pi,R> to FSum<Pi,R>{
   }
   @:to public inline function toUnary():Unary<Pi,R>{
     return switch(this){
-      case F0X(f) : (_:Pi) -> { f();  return cast Noise;};
-      case F1X(f) : (x:Pi) -> { f(x); return cast Noise;};
+      case F0X(f) : (_:Pi) -> { f();  return cast Nada;};
+      case F1X(f) : (x:Pi) -> { f(x); return cast Nada;};
       case F1R(f) : (x:Pi) -> f(x);
     }
   }
