@@ -1,0 +1,31 @@
+{
+  "build" : {
+    "-lib" : ["tink_core","stx_nano","stx_pico","stx_test"],
+    "-cp"  : ["src/main/haxe"],
+    "unit" : {
+      "--macro" : [
+        "include('stx.Fn',true)",
+        "include('stx.fn',true)"
+      ],
+      "interp" : {
+        "--interp" : true
+      }
+    },
+    "main" : {
+      "-main" : "Main",
+      "hashlink" : {
+        "-hl"   : "build/main/hl/main.hl" 
+      },
+      "interp" : {
+        "--interp"   : true 
+      }
+    },
+    "test" : {
+      "hl" : {
+        "--verbose" : true,
+        "-hl"     : "build/test/hl/main.hl",
+        "-main"   : "hl.Test"
+      }
+    }
+  }
+}
