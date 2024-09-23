@@ -1,4 +1,0 @@
--cp ../..
--D use_rtti_doc
--main Test
--neko app.n
