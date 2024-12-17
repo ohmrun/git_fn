@@ -1,9 +1,21 @@
 package stx.fn.lift;
 
 class LiftBroker{
-  static public function broker<T,U>(v:T,fn:Unary<T,T> -> Unary<T,U>):U{
+  /**
+   * Transform `identity` function and apply it to `v`. 
+   * @param v `P`
+   * @param fn `haxe.macro.Expr`
+   * @return `haxe.macro.Expr`
+   */
+  static public function broker<P,R>(v:P,fn:(identity:Unary<P,P>) -> Unary<P,R>):R{
     return fn((x) -> x)(v);
   }
+  /**
+   * Macro version of `broker` that displays the supplied function types.
+   * @param e0 `haxe.macro.Expr`
+   * @param e1 `haxe.macro.Expr`
+   * @return `haxe.macro.Expr`
+   */
   static public macro function brokert<T,U>(e0:haxe.macro.Expr,e1:haxe.macro.Expr):haxe.macro.Expr{
 
     var str0 = haxe.macro.TypeTools.toString(haxe.macro.Context.typeof(e0));
