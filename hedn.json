@@ -12,9 +12,9 @@
       }
     },
     "main" : {
-      "-main" : "Main",
+      "--main" : "Main",
       "hashlink" : {
-        "-hl"   : "build/main/hl/main.hl" 
+        "--hl"   : "build/main/hl/main.hl" 
       },
       "interp" : {
         "--interp"   : true 
@@ -23,8 +23,8 @@
     "test" : {
       "hl" : {
         "--verbose" : true,
-        "-hl"     : "build/test/hl/main.hl",
-        "-main"   : "hl.Test"
+        "--hl"     : "build/test/hl/main.hl",
+        "--main"   : "hl.Test"
       }
     }
   }

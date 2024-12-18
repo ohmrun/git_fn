@@ -3,8 +3,6 @@ package stx;
 import tink.CoreApi;
 
 using stx.Pico;
-using stx.Nano;
-
 using stx.Fn;
 
 class Fn{
@@ -23,6 +21,12 @@ class Fn{
   @:noUsing static public inline function _1r(){
     return Unary.unit();
   }
+  // @:noUsing static public inline function execute<P>(fn:P->Void):Unary<P,P>{
+  //   return (p:P) -> {
+  //     fn(p);
+  //     return p;
+  //   }
+  // }
 }
 typedef BlockDef                                = Void->Void;
 typedef Block                                   = stx.fn.Block;
@@ -67,7 +71,7 @@ typedef Switch<Pi,Pii,Ri,Rii>                   = stx.fn.Switch<Pi,Pii,Ri,Rii>;
 typedef PickDef<Pi,Ri,Rii>                      = Pi -> Either<Ri,Rii>;
 typedef Pick<Pi,Ri,Rii>                         = stx.fn.Pick<Pi,Ri,Rii>;
 
-typedef PerhapsDef<P,R>                         = Option<P> -> Option<R>;
+typedef PerhapsDef<P,R>                         = stx.fn.Perhaps.PerhapsDef<P,R>;
 typedef Perhaps<P,R>                            = stx.fn.Perhaps<P,R>;
 
 typedef F<Pi,R>                                 = stx.fn.F<Pi,R>;

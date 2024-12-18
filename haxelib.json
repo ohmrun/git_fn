@@ -14,8 +14,7 @@
     "url": "https://github.com/ohmrun/stx_fn",
     "dependencies": {
         "tink_core"     : "",
-        "stx_pico"      : "",
-        "stx_nano"      : ""
+        "stx_pico"      : ""
     },
     "classPath": "src/main/haxe"
 }

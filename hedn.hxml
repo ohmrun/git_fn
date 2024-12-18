@@ -1,0 +1,8 @@
+--library tink_core
+--library stx_nano
+--library stx_pico
+--library stx_test
+--class-path src/main/haxe
+--macro include('stx.Fn',true)
+--macro include('stx.fn',true)
+--interp 
